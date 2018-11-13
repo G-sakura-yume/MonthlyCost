@@ -15,6 +15,6 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public String postLogin() {
-		return "login/login";
+		return "redirect:/home";
 	}
 }
