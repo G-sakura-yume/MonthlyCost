@@ -28,7 +28,7 @@ public class HomeController {
 
 	@GetMapping("/userList")
 	public String getUserList(Model model) {
-		model.addAttribute("contents","login/userList :: userList_contents");
+		model.addAttribute("contents","home/userList :: userList_contents");
 		List<User> userList = userService.selectMany();
 		model.addAttribute("userList",userList);
 		return "home/userList";

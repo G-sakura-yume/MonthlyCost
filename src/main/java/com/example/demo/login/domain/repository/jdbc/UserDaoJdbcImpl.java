@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.login.domain.model.User;
@@ -17,10 +18,14 @@ public class UserDaoJdbcImpl implements UserDao {
 	@Autowired
 	JdbcTemplate jdbc;
 
+	@Autowired
+	PasswordEncoder passwordEncoder;
+
 	@Override
 	public int insertOne(User user) throws DataAccessException {
+		String password=passwordEncoder.encode(user.getPassword());
 		String sql ="insert into m_user (user_id,password,role)values(?,?,?)";
-		return jdbc.update(sql,user.getUserId(),user.getPassword(),user.getRole());
+		return jdbc.update(sql,user.getUserId(),password,user.getRole());
 	}
 
 	@Override
@@ -39,8 +44,9 @@ public class UserDaoJdbcImpl implements UserDao {
 
 	@Override
 	public int updateOne(User user) throws DataAccessException {
+		String password=passwordEncoder.encode(user.getPassword());
 		String sql ="update m_user set m_user into password=?,role=? where user_id=?";
-		return jdbc.update(sql,user.getPassword(),user.getRole(),user.getUserId());
+		return jdbc.update(sql,password,user.getRole(),user.getUserId());
 	}
 
 	@Override

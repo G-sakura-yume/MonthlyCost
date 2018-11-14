@@ -15,15 +15,12 @@
                 <th class="info col-sm-2">ユーザID</th>
                 <th class="info col-sm-2">パスワード</th>
                 <th class="info col-sm-2">権限</th>
-                <th class="info col-sm-2"></th>
             </tr>
             <tr th:each="user:${userList}">
                 <td th:text="${user.userId}"></td>
                 <td th:text="${user.password}"></td>
                 <td th:text="${user.role}"></td>
-                <td>
-                    <a class="btn btn-primary" th:href="@{'/userDetail/'+${user.userId}}">詳細</a>
-                </td>
+
             </tr>
         </table>
     </div>

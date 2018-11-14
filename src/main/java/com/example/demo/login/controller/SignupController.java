@@ -1,6 +1,7 @@
 package com.example.demo.login.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,11 +33,15 @@ public class SignupController {
 		user.setUserId(form.getUserId());
 		user.setPassword(form.getPassword());
 		user.setRole("ROLE_GENERAL");
-		boolean result=userService.insert(user);
-		if (result) {
-			System.out.println("insert成功");
-		} else {
-			System.out.println("insert失敗");
+		try {
+			boolean result=userService.insert(user);
+			if (result) {
+				System.out.println("insert成功");
+			} else {
+				System.out.println("insert失敗");
+			}
+		} catch (DataAccessException e) {
+			model.addAttribute("result","そのメールアドレスは使われています");
 		}
 		return "redirect:/login";
 	}
