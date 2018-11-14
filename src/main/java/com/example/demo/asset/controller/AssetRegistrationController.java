@@ -22,14 +22,14 @@ public class AssetRegistrationController {
 
 	@GetMapping("/assetRegist")
 	public String getAssetRegistration(@ModelAttribute  AssetRegistrationForm form,Model model) {
-		model.addAttribute("contents", "asset/regist :: regist_contents");
-		return "asset/regist";
+		model.addAttribute("contents", "home/assetRegist :: assetRegist_contents");
+		return "home/assetRegist";
 	}
 
 	@PostMapping("/assetRegist")
 	public String postAssetRegistration(@ModelAttribute @Validated AssetRegistrationForm form,BindingResult bindResult,Model model) {
-		model.addAttribute("contents", "asset/regist :: regist_contents");
-		if (bindResult.hasErrors()) return getAssetRegistration(form,model);
+		model.addAttribute("contents", "home/assetRegist :: assetRegist_contents");
+//		if (bindResult.hasErrors()) return getAssetRegistration(form,model);
 		System.out.println(form);
 		Asset asset = new Asset();
 		asset.setAssetName(form.getAssetName());
@@ -46,7 +46,7 @@ public class AssetRegistrationController {
 		} catch (DataAccessException e) {
 			System.out.println("inset失敗(エラー)");
 		}
-		return "asset/regist";
+		return "home/assetRegist";
 	}
 
 }

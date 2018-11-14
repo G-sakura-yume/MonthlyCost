@@ -18,7 +18,8 @@ public class AssetDaoJdbcImpl implements AssetDao{
 	@Override
 	public int insertOne(Asset asset) throws DataAccessException {
 		String sql ="insert into m_asset (asset_name,purchase_date,used_term,user_id)values(?,?,?,?)";
-		return jdbc.update(sql,asset.getAssetName(),asset.getPurchaseDate(),asset.getUsedTerm(),"yamada@xxx.co.jp");
+		int rowNumber=jdbc.update(sql,asset.getAssetName(),asset.getPurchaseDate(),asset.getUsedTerm(),"yamada@xxx.co.jp");;
+		return rowNumber;
 	}
 
 	@Override
