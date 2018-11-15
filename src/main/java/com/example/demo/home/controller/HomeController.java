@@ -31,6 +31,6 @@ public class HomeController {
 		model.addAttribute("contents","home/userList :: userList_contents");
 		List<User> userList = userService.selectMany();
 		model.addAttribute("userList",userList);
-		return "home/userList";
+		return "home/homeLayout";
 	}
 }

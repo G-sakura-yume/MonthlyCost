@@ -23,7 +23,7 @@ public class AssetRegistrationController {
 	@GetMapping("/assetRegist")
 	public String getAssetRegistration(@ModelAttribute  AssetRegistrationForm form,Model model) {
 		model.addAttribute("contents", "home/assetRegist :: assetRegist_contents");
-		return "home/assetRegist";
+		return "home/homeLayout";
 	}
 
 	@PostMapping("/assetRegist")
@@ -46,7 +46,7 @@ public class AssetRegistrationController {
 		} catch (DataAccessException e) {
 			System.out.println("inset失敗(エラー)");
 		}
-		return "home/assetRegist";
+		return "home/homeLayout";
 	}
 
 }
