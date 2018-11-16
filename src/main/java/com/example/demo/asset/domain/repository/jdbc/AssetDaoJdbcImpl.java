@@ -4,7 +4,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.asset.domain.model.Asset;
@@ -17,8 +19,8 @@ public class AssetDaoJdbcImpl implements AssetDao{
 
 	@Override
 	public int insertOne(Asset asset) throws DataAccessException {
-		String sql ="insert into m_asset (asset_name,purchase_date,used_term,user_id)values(?,?,?,?)";
-		int rowNumber=jdbc.update(sql,asset.getAssetName(),asset.getPurchaseDate(),asset.getUsedTerm(),"yamada@xxx.co.jp");;
+		String sql ="insert into m_asset (asset_name,asset_price,purchase_date,used_term,user_id)values(?,?,?,?,?)";
+		int rowNumber=jdbc.update(sql,asset.getAssetName(),asset.getAssetPrice(),asset.getPurchaseDate(),asset.getUsedTerm(),"yamada@xxx.co.jp");;
 		return rowNumber;
 	}
 
@@ -30,8 +32,9 @@ public class AssetDaoJdbcImpl implements AssetDao{
 
 	@Override
 	public List<Asset> selectMany() throws DataAccessException {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+		String sql="select * from m_asset as m where m.user_id=?";
+		RowMapper<Asset> rowMapper=new BeanPropertyRowMapper<Asset>(Asset.class);
+		return jdbc.query(sql,rowMapper,"yamada@xxx.co.jp");
 	}
 
 	@Override

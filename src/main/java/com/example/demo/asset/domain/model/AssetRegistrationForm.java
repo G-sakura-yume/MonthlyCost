@@ -13,6 +13,8 @@ import lombok.Data;
 public class AssetRegistrationForm {
 	@NotBlank
 	private String assetName;
+	@NotNull
+	private int assetPrice;
 	@DateTimeFormat(pattern = "yyyy/MM/dd")
 	private Date purchaseDate;
 	@NotNull

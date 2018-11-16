@@ -22,17 +22,18 @@ public class AssetRegistrationController {
 
 	@GetMapping("/assetRegist")
 	public String getAssetRegistration(@ModelAttribute  AssetRegistrationForm form,Model model) {
-		model.addAttribute("contents", "home/assetRegist :: assetRegist_contents");
+		model.addAttribute("contents", "asset/assetRegist :: assetRegist_contents");
 		return "home/homeLayout";
 	}
 
 	@PostMapping("/assetRegist")
 	public String postAssetRegistration(@ModelAttribute @Validated AssetRegistrationForm form,BindingResult bindResult,Model model) {
-		model.addAttribute("contents", "home/assetRegist :: assetRegist_contents");
+		model.addAttribute("contents", "asset/assetRegist :: assetRegist_contents");
 //		if (bindResult.hasErrors()) return getAssetRegistration(form,model);
 		System.out.println(form);
 		Asset asset = new Asset();
 		asset.setAssetName(form.getAssetName());
+		asset.setAssetPrice(form.getAssetPrice());
 		asset.setPurchaseDate(form.getPurchaseDate());
 		asset.setUsedTerm(form.getUsedTerm());
 		asset.setUserId("yamada@xxx.co.jp");

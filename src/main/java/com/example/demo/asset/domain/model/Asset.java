@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class Asset {
 	private Long assetId;
+	private int assetPrice;
 	private String assetName;
 	private Date purchaseDate;
 	private int usedTerm;
