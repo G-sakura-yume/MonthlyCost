@@ -11,6 +11,7 @@ import lombok.Data;
 
 @Data
 public class AssetRegistrationForm {
+	private Long assetId;
 	@NotBlank
 	private String assetName;
 	@NotNull

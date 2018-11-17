@@ -28,12 +28,12 @@ public class AssetService {
 	}
 
 
-	public List<Asset> selectMany() {
-		return dao.selectMany();
+	public List<Asset> selectMany(String userId) {
+		return dao.selectMany(userId);
 	}
 
-	public Asset selectOne(Long assetId) {
-		return dao.selectOne(assetId);
+	public Asset selectOne(Long assetId,String userId) {
+		return dao.selectOne(assetId, userId);
 	}
 
 	public boolean updateOne(Asset user) {
@@ -45,8 +45,8 @@ public class AssetService {
 		return result;
 	}
 
-	public boolean deleteOne(Long assetId) {
-		int rowNumber=dao.deleteOne(assetId);
+	public boolean deleteOne(Long assetId,String userId) {
+		int rowNumber=dao.deleteOne(assetId, userId);
 		boolean result=false;
 		if (rowNumber>0) {
 			result=true;

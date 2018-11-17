@@ -1,5 +1,7 @@
 package com.example.demo.asset.controller;
 
+import java.security.Principal;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -21,27 +23,28 @@ public class AssetRegistrationController {
 	AssetService assetService;
 
 	@GetMapping("/assetRegist")
-	public String getAssetRegistration(@ModelAttribute  AssetRegistrationForm form,Model model) {
+	public String getAssetRegistration(@ModelAttribute AssetRegistrationForm form, Model model) {
 		model.addAttribute("contents", "asset/assetRegist :: assetRegist_contents");
 		return "home/homeLayout";
 	}
 
 	@PostMapping("/assetRegist")
-	public String postAssetRegistration(@ModelAttribute @Validated AssetRegistrationForm form,BindingResult bindResult,Model model) {
+	public String postAssetRegistration(@ModelAttribute @Validated AssetRegistrationForm form, BindingResult bindResult,
+			Model model,	Principal principal) {
 		model.addAttribute("contents", "asset/assetRegist :: assetRegist_contents");
-//		if (bindResult.hasErrors()) return getAssetRegistration(form,model);
+		//		if (bindResult.hasErrors()) return getAssetRegistration(form,model);
 		System.out.println(form);
 		Asset asset = new Asset();
 		asset.setAssetName(form.getAssetName());
 		asset.setAssetPrice(form.getAssetPrice());
 		asset.setPurchaseDate(form.getPurchaseDate());
 		asset.setUsedTerm(form.getUsedTerm());
-		asset.setUserId("yamada@xxx.co.jp");
+		asset.setUserId(principal.getName());
 		try {
-			boolean result=assetService.insert(asset);
+			boolean result = assetService.insert(asset);
 			if (result) {
 				System.out.println("inset成功");
-			}else {
+			} else {
 				System.out.println("inset失敗");
 			}
 		} catch (DataAccessException e) {
@@ -49,5 +52,6 @@ public class AssetRegistrationController {
 		}
 		return "home/homeLayout";
 	}
+
 
 }

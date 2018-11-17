@@ -23,6 +23,9 @@
                 <td th:text="${asset.assetPrice}"></td>
                 <td th:text="${asset.purchaseDate}"></td>
                 <td th:text="${asset.usedTerm}"></td>
+                <td>
+                    <a class="btn btn-primary" th:href="@{'/assetDetail/'+${asset.assetId}}">詳細</a>
+                </td>
             </tr>
         </table>
     </div>
