@@ -18,8 +18,6 @@ public class AssetGrafController {
 	@GetMapping("/assetGlaf")
 	public String getAssetGlaf(Model model,Principal principal) {
 		model.addAttribute("contents", "asset/assetGlaf :: assetGlaf_contents");
-//		List<Asset> assetList = assetService.selectMany(principal.getName());
-//		TODO:Graf用の数値を整形する
 		return "home/homeLayout";
 	}
 }
