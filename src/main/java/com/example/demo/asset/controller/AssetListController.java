@@ -55,13 +55,14 @@ public class AssetListController {
 		asset.setAssetPrice(form.getAssetPrice());
 		asset.setPurchaseDate(form.getPurchaseDate());
 		asset.setUsedTerm(form.getUsedTerm());
+		asset.setUserId(principal.getName());
 		boolean result = assetService.updateOne(asset);
 		if (result) {
 			model.addAttribute("result", "更新成功");
 		} else {
 			model.addAttribute("result", "更新失敗");
 		}
-		return getAssetDetail(form, model, form.getAssetId(), principal);
+		return getAssetList(model, principal);
 	}
 
 	@PostMapping(value = "/assetDetail", params = "delete")

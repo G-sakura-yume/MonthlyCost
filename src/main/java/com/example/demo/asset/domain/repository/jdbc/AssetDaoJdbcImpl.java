@@ -39,14 +39,14 @@ public class AssetDaoJdbcImpl implements AssetDao{
 
 	@Override
 	public int updateOne(Asset asset) throws DataAccessException {
-		String sql="update m_asset set asset_name =?,asset_price=?,purchase_date=?,used_term=? where asset_id=?";
-		return jdbc.update(sql,asset.getAssetName(),asset.getAssetPrice(),asset.getPurchaseDate(),asset.getUsedTerm(),asset.getAssetId());
+		String sql="update m_asset set asset_name =?,asset_price=?,purchase_date=?,used_term=? where asset_id=? and user_id =?";
+		return jdbc.update(sql,asset.getAssetName(),asset.getAssetPrice(),asset.getPurchaseDate(),asset.getUsedTerm(),asset.getAssetId(),asset.getUserId());
 	}
 
 	@Override
 	public int deleteOne(Long assetId,String userId) throws DataAccessException {
-		String sql="delete from m_asset where asset_id=?";
-		return jdbc.update(sql,assetId);
+		String sql="delete from m_asset where asset_id=? and user_id=?";
+		return jdbc.update(sql,assetId,userId);
 	}
 
 }
