@@ -15,7 +15,7 @@ public class AssetListForm {
 private String assetName;
 @NotNull
 private int assetPrice;
-@DateTimeFormat(pattern = "yyyy/MM/dd")
+@DateTimeFormat(pattern = "yyyy-MM")
 private Date purchaseDate;
 @NotNull
 private int usedTerm;
