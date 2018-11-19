@@ -1,61 +1,77 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 </head>
 
 <body>
-    <div th:fragment="assetRegist_contents">
-        <div class="page-header">
-            <h1>資産登録</h1>
-        </div>
-        <form method="post" th:action="@{/assetRegist}" th:object="${assetRegistrationForm}">
-            <table class="table table-bordered table-hover">
-                <tr>
-                    <th class="active col-sm-3">名前</th>
-                    <td>
-                        <div class="form-group" th:classappend="${#fields.hasErrors('assetName')}?'has-error'">
-                            <input type="text" class="form-control" th:field="*{assetName}" maxlength="100">
-                            <span class="text-danger" th:if="${#fields.hasErrors('assetName')}" th:errors="*{assetName}">assetName error</span>
+	<div th:fragment="assetRegist_contents">
+		<div class="page-header">
+			<h1>資産登録</h1>
+		</div>
+		<form method="post" th:action="@{/assetRegist}"
+			th:object="${assetRegistrationForm}">
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th class="active col-sm-3">名前</th>
+					<td>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('assetName')}?'has-error'">
+							<input type="text" class="form-control" th:field="*{assetName}"
+								maxlength="100"> <span class="text-danger"
+								th:if="${#fields.hasErrors('assetName')}"
+								th:errors="*{assetName}">assetName error</span>
 
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="active col-sm-3">値段</th>
-                    <td>
-                        <div class="form-group" th:classappend="${#fields.hasErrors('assetPrice')}?'has-error'">
-                            <input type="text" class="form-control" th:field="*{assetPrice}">
-                            <span class="text-danger" th:if="${#fields.hasErrors('assetPrice')}" th:errors="*{assetPrice}">password error</span>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="active col-sm-3">値段</th>
+					<td>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('assetPrice')}?'has-error'">
+							<input type="text" class="form-control" th:field="*{assetPrice}">
+							<span class="text-danger"
+								th:if="${#fields.hasErrors('assetPrice')}"
+								th:errors="*{assetPrice}">password error</span>
 
-                        </div>
-                    </td>
-                </tr>
+						</div>
+					</td>
+				</tr>
 
-                <tr>
-                    <th class="active">購入月</th>
+				<tr>
+					<th class="active">購入月</th>
 
-                    <td>
-                        <div class="form-group" th:classappend="${#fields.hasErrors('purchaseDate')}?'has-error'">
-                            <input type="text" class="form-control" placeholder="yyyy/MM/dd" th:field="*{purchaseDate}">
-                            <span class="text-danger" th:if="${#fields.hasErrors('purchaseDate')}" th:errors="*{purchaseDate}">purchaseDate error</span>
+					<td>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('purchaseDate')}?'has-error'">
+							<input type="text" class="form-control" placeholder="yyyy/MM/dd"
+								th:field="*{purchaseDate}"> <span class="text-danger"
+								th:if="${#fields.hasErrors('purchaseDate')}"
+								th:errors="*{purchaseDate}">purchaseDate error</span>
 
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <th class="active">予定使用期間（○ヶ月）</th>
-                    <td>
-                        <div class="form-group" th:classappend="${#fields.hasErrors('usedTerm')}?'has-error'"><input type="text" class="form-control" th:field="*{usedTerm}">
-                            <span class="text-danger" th:if="${#fields.hasErrors('usedTerm')}" th:errors="*{usedTerm}">usedTerm error</span>
-                        </div>
-                    </td>
-                </tr>
-            </table>
-            <button class="btn btn-primary" type="submit">資産登録</button>
-        </form>
-    </div>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th class="active">予定使用期間（○ヶ月）</th>
+					<td>
+						<div class="form-group"
+							th:classappend="${#fields.hasErrors('usedTerm')}?'has-error'">
+							<input type="text" class="form-control" th:field="*{usedTerm}">
+							<span class="text-danger"
+								th:if="${#fields.hasErrors('usedTerm')}" th:errors="*{usedTerm}">usedTerm
+								error</span>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<label class="text-info" th:text="${result}">結果表示</label><br />
+			<button class="btn btn-primary" type="submit">資産登録</button>
+		</form>
+	</div>
 </body>
 
 </html>

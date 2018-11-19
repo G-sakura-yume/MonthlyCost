@@ -43,12 +43,12 @@ public class AssetRegistrationController {
 		try {
 			boolean result = assetService.insert(asset);
 			if (result) {
-				System.out.println("inset成功");
+				model.addAttribute("result", "登録成功");
 			} else {
-				System.out.println("inset失敗");
+				model.addAttribute("result", "登録失敗");
 			}
 		} catch (DataAccessException e) {
-			System.out.println("inset失敗(エラー)");
+			model.addAttribute("result", "登録失敗");
 		}
 		return "home/homeLayout";
 	}
