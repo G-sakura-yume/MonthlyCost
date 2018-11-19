@@ -15,6 +15,10 @@ public class Asset {
 	private int usedTerm;
 	private String userId;
 
+	/**
+	 * 減価償却完了月
+	 * @return
+	 */
 	public Date getPurchaseEndDate() {
 		//	TODO:	汚いので後で直したい
 		//		Date型をLocalDate型に変換
@@ -23,5 +27,8 @@ public class Asset {
 		//		LocalDate型をDate型に変換
 		Date purchaseEndDate = Date.from(purchaseLocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
 		return purchaseEndDate;
+	}
+	public int getMonthlyCost() {
+		return assetPrice/usedTerm;
 	}
 }
