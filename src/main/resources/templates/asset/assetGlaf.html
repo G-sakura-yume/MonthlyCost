@@ -19,9 +19,9 @@
                     data: {
                         labels: /*[[ ${label} ]]*/,
                         datasets: [{
-                            label: '月々の資産',
+                            label: 'ひと月あたりの資産額',
                             data:  /*[[ ${point} ]]*/,
-                            backgroundColor: "rgba(137, 196, 255,1)"
+                            backgroundColor: "rgba(137, 196, 255,1)",
 
                         },]
                     },
@@ -32,6 +32,10 @@
                                 ticks: {
                                   beginAtZero: true,
                                   min: 0,
+                                  callback: function(value){
+                                      return value+"円";
+                                    },
+
                                 }
                               }
                             ]
