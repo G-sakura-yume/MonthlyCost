@@ -1,5 +1,6 @@
 package com.example.demo.asset.domain.service;
 
+import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,34 +25,60 @@ public class AssetService {
 			result = true;
 		}
 		return result;
-
 	}
-
 
 	public List<Asset> selectMany(String userId) {
 		return dao.selectMany(userId);
 	}
 
-	public Asset selectOne(Long assetId,String userId) {
+	public Asset selectOne(Long assetId, String userId) {
 		return dao.selectOne(assetId, userId);
 	}
 
 	public boolean updateOne(Asset user) {
-		int rowNumber =dao.updateOne(user);
-		boolean result =false;
-		if(rowNumber>0) {
-			result=true;
+		int rowNumber = dao.updateOne(user);
+		boolean result = false;
+		if (rowNumber > 0) {
+			result = true;
 		}
 		return result;
 	}
 
-	public boolean deleteOne(Long assetId,String userId) {
-		int rowNumber=dao.deleteOne(assetId, userId);
-		boolean result=false;
-		if (rowNumber>0) {
-			result=true;
+	public boolean deleteOne(Long assetId, String userId) {
+		int rowNumber = dao.deleteOne(assetId, userId);
+		boolean result = false;
+		if (rowNumber > 0) {
+			result = true;
 		}
 		return result;
+	}
+
+	public int[] createGlafPoint(List<Asset> assetList) {
+//	TODO:	この処理移動したい
+		int point[] = new int[9];
+		Calendar purchaseCal = Calendar.getInstance();
+		Calendar purchaseEndCal = Calendar.getInstance();
+
+		Calendar pointCal = Calendar.getInstance();
+		int month = pointCal.get(Calendar.MONTH);
+		int year = pointCal.get(Calendar.YEAR);
+		pointCal.set(year, month - 5, 1, 0, 0, 0);
+
+		for (int i = 0; i < 9; i++) {
+			pointCal.add(Calendar.MONTH, 1);
+			for (Asset asset : assetList) {
+				purchaseCal.setTime(asset.getPurchaseDate());
+				purchaseEndCal.setTime(asset.getPurchaseEndDate());
+				if (pointCal.compareTo(purchaseCal) == 0 || pointCal.compareTo(purchaseCal) > 0) {
+					if (pointCal.compareTo(purchaseEndCal) < 0) {
+						point[i] += asset.getMonthlyCost();
+					}
+				}
+
+			}
+		}
+
+		return point;
 	}
 
 }
