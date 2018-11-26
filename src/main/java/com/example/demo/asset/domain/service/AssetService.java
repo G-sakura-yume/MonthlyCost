@@ -1,5 +1,6 @@
 package com.example.demo.asset.domain.service;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
 
@@ -62,10 +63,9 @@ public class AssetService {
 		Calendar pointCal = Calendar.getInstance();
 		int month = pointCal.get(Calendar.MONTH);
 		int year = pointCal.get(Calendar.YEAR);
-		pointCal.set(year, month - 5, 1, 0, 0, 0);
+		pointCal.set(year, month - 4, 1, 0, 0, 0);
 
 		for (int i = 0; i < 9; i++) {
-			pointCal.add(Calendar.MONTH, 1);
 			for (Asset asset : assetList) {
 				purchaseCal.setTime(asset.getPurchaseDate());
 				purchaseEndCal.setTime(asset.getPurchaseEndDate());
@@ -74,11 +74,27 @@ public class AssetService {
 						point[i] += asset.getMonthlyCost();
 					}
 				}
-
+				pointCal.add(Calendar.MONTH, 1);
 			}
 		}
 
 		return point;
+	}
+
+	public String[] createGlafLabel() {
+//		TODO:	この処理移動したい
+		String label[] = new String[9];
+		SimpleDateFormat  sdf = new SimpleDateFormat("yyyy年MM月");
+
+		Calendar rabelCal = Calendar.getInstance();
+		rabelCal.add(Calendar.MONTH, -4);
+
+		for (int i = 0; i < 9; i++) {
+			label[i]=sdf.format(rabelCal.getTime());
+			rabelCal.add(Calendar.MONTH, 1);
+		}
+
+		return label;
 	}
 
 }

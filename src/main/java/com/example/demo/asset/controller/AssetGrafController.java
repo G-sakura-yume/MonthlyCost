@@ -21,9 +21,10 @@ public class AssetGrafController {
 	public String getAssetGlaf(Model model, Principal principal) {
 		model.addAttribute("contents", "asset/assetGlaf :: assetGlaf_contents");
 		List<Asset> assetList = assetService.selectMany(principal.getName());
-		int[] point = assetService.createGlafPoint(assetList);
 		//        int point[] = {1000,2000,3000,3000,4000,5000,2000,4000,3500};
-		String label[] = { "2018年7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月" };
+		int[] point = assetService.createGlafPoint(assetList);
+		//		String label[] = { "2018年7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月", "3月" };
+		String label[] = assetService.createGlafLabel();
 		model.addAttribute("label", label);
 		model.addAttribute("point", point);
 		return "home/homeLayout";
